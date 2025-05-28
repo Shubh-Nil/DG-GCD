@@ -173,6 +173,14 @@
       " title="Copy BibTeX">
         <i class="fas fa-copy"></i>
       </button>
+      <span id="copy-msg" style="
+        margin-left: 10px;
+        font-size: 0.9rem;
+        color: #444;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      ">Copied!
+      </span>
     </h2>
     <pre id="bibtex-code">@inproceedings{Rathore2025DGCD,
     author    = {Rathore, Vaibhav and B, Shubhranil and Dutta, Saikat and Mehrotra, Sarthak and Kira, Zsolt and Banerjee, Biplab},
@@ -183,14 +191,18 @@
   </section>
 
   <script>
-    function copyBibtex() {
-      const code = document.getElementById("bibtex-code").innerText;
-      navigator.clipboard.writeText(code).then(() => {
-        alert("BibTeX copied to clipboard!");
-      }).catch(err => {
-        console.error("Failed to copy: ", err);
-      });
-    }
+  function copyBibtex() {
+    const code = document.getElementById("bibtex-code").innerText;
+    navigator.clipboard.writeText(code).then(() => {
+      const msg = document.getElementById("copy-msg");
+      msg.style.opacity = 1;
+      setTimeout(() => {
+        msg.style.opacity = 0;
+      }, 2000);
+    }).catch(err => {
+      console.error("Failed to copy: ", err);
+    });
+  }
   </script>
 
   <footer style="text-align: center; font-size: 0.9rem; color: #555; margin: 3rem 0 1rem;">
