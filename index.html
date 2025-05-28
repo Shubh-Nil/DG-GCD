@@ -159,6 +159,7 @@
       font-size: 15px;
       color: #444;
       line-height: 1.6;
+      position: relative;
     ">
     <h2 style="font-weight: 600; margin-bottom: 1rem;">
       BibTeX
@@ -173,13 +174,24 @@
         <i class="fas fa-copy"></i>
       </button>
     </h2>
-    <pre>@inproceedings{Rathore2025DGCD,
+    <pre id="bibtex-code">@inproceedings{Rathore2025DGCD,
     author    = {Rathore, Vaibhav and B, Shubhranil and Dutta, Saikat and Mehrotra, Sarthak and Kira, Zsolt and Banerjee, Biplab},
     title     = {When Domain Generalization meets Generalized Category Discovery: An Adaptive Task-Arithmetic Driven Approach},
     booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
     year      = {2025}
   }</pre>
   </section>
+
+  <script>
+    function copyBibtex() {
+      const code = document.getElementById("bibtex-code").innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("BibTeX copied to clipboard!");
+      }).catch(err => {
+        console.error("Failed to copy: ", err);
+      });
+    }
+  </script>
 
   <footer style="text-align: center; font-size: 0.9rem; color: #555; margin: 3rem 0 1rem;">
     The template is borrowed from
