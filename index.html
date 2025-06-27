@@ -235,6 +235,19 @@
       opacity: 1;
       transform: translateY(0);
     }
+    .full-width-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 3rem;
+      width: 100%;
+    }
+    .full-width-image img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
   </style>
  
@@ -300,6 +313,9 @@
     <img src="images/gen/seen.png" class="image-part part2 right-img" alt="Inference Seen">
     <img src="images/gen/unseen.png" class="image-part part3 right-img" alt="Inference Unseen">
   </div>
+</div>
+<div class="full-width-image">
+  <img src="images/gen/train-test.png" class="image-part visible" alt="Full Span Image">
 </div>
 
 
