@@ -97,8 +97,8 @@
 
     .tsne-item {
       opacity: 0;
-      transform: scale(0.95);
-      transition: opacity 1s ease, transform 1s ease;
+      transform: translateX(-30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
       height: auto;
       max-height: 200px;
       margin: 0;
@@ -106,7 +106,7 @@
 
     .tsne-item.visible {
       opacity: 1;
-      transform: scale(1);
+      transform: translateX(0);
     }
 
     /*.fade-in {
@@ -370,19 +370,27 @@
   }
 
   function revealOnScroll() {
-    const elements = document.querySelectorAll('.animate-on-scroll, .tsne-item, .bar-chart');
+    const tsneItems = document.querySelectorAll('.tsne-item');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          if (entry.target.classList.contains('tsne-animation')) {
+            tsneItems.forEach((el, i) => {
+              setTimeout(() => {
+                el.classList.add('visible');
+              }, i * 300);
+            });
+          }
           if (entry.target.classList.contains('bar-chart')) {
+            entry.target.classList.add('visible');
             animateBarChart();
           }
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.3 });
-    elements.forEach(el => observer.observe(el));
+
+    document.querySelectorAll('.animate-on-scroll, .bar-chart, .tsne-animation').forEach(el => observer.observe(el));
   }
 
   window.addEventListener('DOMContentLoaded', revealOnScroll);
