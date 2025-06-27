@@ -123,20 +123,27 @@
       padding-left: 40px;
       border-left: 2px solid #999;
       border-bottom: 2px solid #999;
+      background: repeating-linear-gradient(
+        to top,
+        #eee,
+        #eee 1px,
+        transparent 1px,
+        transparent 40px
+      );
     }
     .bar-chart::before {
       content: "% Sign Conflicts";
       position: absolute;
-      top: -20px;
-      left: 0;
+      left: -60px;
+      bottom: 100px;
       transform: rotate(-90deg);
-      transform-origin: left top;
+      transform-origin: center;
       font-size: 0.9rem;
       color: #666;
     }
     .bar-container {
       display: flex;
-      flex-direction: column;
+      flex-direction: column-reverse;
       align-items: center;
       position: relative;
     }
@@ -162,10 +169,11 @@
     .bar-3-label { color: #ab4674; }
     .bar-4-label { color: #a188f2; }
     .bar-title {
-      margin-top: 6px;
+      margin-top: 8px;
       text-align: center;
       font-size: 0.9rem;
       color: #444;
+      transform: translateY(20px);
     }
     
     .animate-on-scroll {
@@ -236,22 +244,22 @@
   <div class="bar-chart animate-on-scroll">
     <div class="bar-container">
       <div class="bar bar-1" data-height="96"></div>
-      <div class="bar-label" data-target="0.96">0.00</div>
+      <div class="bar-label bar-1-label" data-target="0.96">0.00</div>
       <div class="bar-title">Ties Merging</div>
     </div>
     <div class="bar-container">
       <div class="bar bar-2" data-height="63"></div>
-      <div class="bar-label" data-target="0.63">0.00</div>
+      <div class="bar-label bar-2-label" data-target="0.63">0.00</div>
       <div class="bar-title">Fisher Merging</div>
     </div>
     <div class="bar-container">
       <div class="bar bar-3" data-height="58"></div>
-      <div class="bar-label" data-target="0.58">0.00</div>
+      <div class="bar-label bar-3-label" data-target="0.58">0.00</div>
       <div class="bar-title">Task Arithmetic</div>
     </div>
     <div class="bar-container">
       <div class="bar bar-4" data-height="54"></div>
-      <div class="bar-label" data-target="0.54">0.00</div>
+      <div class="bar-label bar-4-label" data-target="0.54">0.00</div>
       <div class="bar-title">DG²CD-Net</div>
     </div>
   </div>
