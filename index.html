@@ -85,15 +85,52 @@
     }
   </style>
 
+  <style>
+  .tsne-animation {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0;
+    margin-top: 3rem;
+    overflow-x: auto;
+    background-color: white;
+    border-radius: 8px;
+  }
 
-  <!-- <style>
-    h1 {
-      font-size: 2.5rem;
-      max-width: 720px;
-      margin-bottom: 0.5rem;
-      line-height: 1.2;
+  .tsne-item {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    height: auto;
+    max-height: 200px;
+    margin: 0;
+  }
+
+  .fade-in {
+    animation: appear 0.5s forwards;
+  }
+
+  .delay-0 { animation-delay: 0s; }
+  .delay-1 { animation-delay: 0.5s; }
+  .delay-2 { animation-delay: 1s; }
+  .delay-3 { animation-delay: 1.5s; }
+  .delay-4 { animation-delay: 2s; }
+
+  .legend {
+    opacity: 1;
+    transform: none;
+    max-height: 200px;
+    margin-left: 12px;
+  }
+
+  @keyframes appear {
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
-  </style> -->
+  }
+  </style>
+ 
 </head>
 <body>
 
@@ -145,6 +182,15 @@
       </svg>
       Poster
     </a>
+  </div>
+
+  <div class="tsne-animation">
+    <img src="images/ViT.png" class="tsne-item fade-in delay-0" alt="ViT" />
+    <img src="images/gcd.png" class="tsne-item fade-in delay-1" alt="GCD" />
+    <img src="images/cdad.png" class="tsne-item fade-in delay-2" alt="CDAD-Net" />
+    <img src="images/dgcd.png" class="tsne-item fade-in delay-3" alt="DG2CD-Net" />
+    <img src="images/dgcd_lora.png" class="tsne-item fade-in delay-4" alt="DG2CD-Net LoRA" />
+    <img src="images/legend.png" class="legend" alt="Legend" />
   </div>
 
   <section class="section" id="BibTeX" style="
