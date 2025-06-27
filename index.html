@@ -94,44 +94,24 @@
       background-color: white;
       border-radius: 8px;
     }
-
     .tsne-item {
       opacity: 0;
       transform: translateX(-30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity 1s ease, transform 1s ease;
       height: auto;
       max-height: 200px;
       margin: 0;
     }
-
     .tsne-item.visible {
       opacity: 1;
       transform: translateX(0);
     }
-
-    /*.fade-in {
-      animation: appear 1s forwards;
-    }
-
-    .delay-0 { animation-delay: 0s; }
-    .delay-1 { animation-delay: 1s; }
-    .delay-2 { animation-delay: 2s; }
-    .delay-3 { animation-delay: 3s; }
-    .delay-4 { animation-delay: 4s; } */
-
     .legend {
       opacity: 1;
       transform: none;
       max-height: 200px;
       margin-left: 12px;
     }
-
-    /* @keyframes appear {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    } */
 
     .bar-chart {
       display: flex;
@@ -140,41 +120,54 @@
       gap: 30px;
       height: 200px;
       margin-top: 3rem;
+      padding-left: 40px;
+      border-left: 2px solid #999;
+      border-bottom: 2px solid #999;
     }
-
+    .bar-chart::before {
+      content: "% Sign Conflicts";
+      position: absolute;
+      top: -20px;
+      left: 0;
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      font-size: 0.9rem;
+      color: #666;
+    }
     .bar-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
     }
-
     .bar {
       width: 40px;
       height: 0;
       background-color: #6c63ff;
-      transition: height 1s ease-out;
+      transition: height 2s ease-out;
       border-radius: 4px 4px 0 0;
     }
-
     .bar-1 { background-color: #66bb6a; }  /* green */
     .bar-2 { background-color: #4f9cae; }  /* blue */
     .bar-3 { background-color: #ab4674; }  /* magenta */
     .bar-4 { background-color: #a188f2; }  /* purple */
-
     .bar-label {
-      margin-top: 8px;
+      position: absolute;
+      top: -25px;  /* move above the bar */
       font-weight: bold;
       font-size: 1rem;
-      color: #333;
     }
-
+    .bar-1-label { color: #66bb6a; }
+    .bar-2-label { color: #4f9cae; }
+    .bar-3-label { color: #ab4674; }
+    .bar-4-label { color: #a188f2; }
     .bar-title {
       margin-top: 6px;
       text-align: center;
       font-size: 0.9rem;
       color: #444;
     }
+    
     .animate-on-scroll {
       opacity: 0;
       transform: translateY(30px);
