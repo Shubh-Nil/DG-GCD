@@ -83,52 +83,107 @@
       width: 1.2em;
       fill: white;
     }
-  </style>
 
-  <style>
-  .tsne-animation {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0;
-    margin-top: 3rem;
-    overflow-x: auto;
-    background-color: white;
-    border-radius: 8px;
-  }
+    .tsne-animation {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0;
+      margin-top: 3rem;
+      overflow-x: auto;
+      background-color: white;
+      border-radius: 8px;
+    }
 
-  .tsne-item {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 1s ease, transform 1s ease;
-    height: auto;
-    max-height: 200px;
-    margin: 0;
-  }
+    .tsne-item {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 1s ease, transform 1s ease;
+      height: auto;
+      max-height: 200px;
+      margin: 0;
+    }
 
-  .fade-in {
-    animation: appear 1s forwards;
-  }
-
-  .delay-0 { animation-delay: 0s; }
-  .delay-1 { animation-delay: 1s; }
-  .delay-2 { animation-delay: 2s; }
-  .delay-3 { animation-delay: 3s; }
-  .delay-4 { animation-delay: 4s; }
-
-  .legend {
-    opacity: 1;
-    transform: none;
-    max-height: 200px;
-    margin-left: 12px;
-  }
-
-  @keyframes appear {
-    to {
+    .tsne-item.visible {
       opacity: 1;
       transform: scale(1);
     }
-  }
+
+    /*.fade-in {
+      animation: appear 1s forwards;
+    }
+
+    .delay-0 { animation-delay: 0s; }
+    .delay-1 { animation-delay: 1s; }
+    .delay-2 { animation-delay: 2s; }
+    .delay-3 { animation-delay: 3s; }
+    .delay-4 { animation-delay: 4s; } */
+
+    .legend {
+      opacity: 1;
+      transform: none;
+      max-height: 200px;
+      margin-left: 12px;
+    }
+
+    /* @keyframes appear {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    } */
+
+    .bar-chart {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 30px;
+      height: 200px;
+      margin-top: 3rem;
+    }
+
+    .bar-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .bar {
+      width: 40px;
+      height: 0;
+      background-color: #6c63ff;
+      transition: height 1s ease-out;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .bar-1 { background-color: #66bb6a; }  /* green */
+    .bar-2 { background-color: #4f9cae; }  /* blue */
+    .bar-3 { background-color: #ab4674; }  /* magenta */
+    .bar-4 { background-color: #a188f2; }  /* purple */
+
+    .bar-label {
+      margin-top: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .bar-title {
+      margin-top: 6px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #444;
+    }
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
  
 </head>
@@ -184,14 +239,44 @@
     </a>
   </div>
 
+
+  <div class="bar-chart">
+    <div class="bar-container">
+      <div class="bar bar-1" data-height="96"></div>
+      <div class="bar-label" data-target="0.96">0.00</div>
+      <div class="bar-title">Ties Merging</div>
+    </div>
+    <div class="bar-container">
+      <div class="bar bar-2" data-height="63"></div>
+      <div class="bar-label" data-target="0.63">0.00</div>
+      <div class="bar-title">Fisher Merging</div>
+    </div>
+    <div class="bar-container">
+      <div class="bar bar-3" data-height="58"></div>
+      <div class="bar-label" data-target="0.58">0.00</div>
+      <div class="bar-title">Task Arithmetic</div>
+    </div>
+    <div class="bar-container">
+      <div class="bar bar-4" data-height="54"></div>
+      <div class="bar-label" data-target="0.54">0.00</div>
+      <div class="bar-title">DG²CD-Net</div>
+    </div>
+  </div>
+
+
   <div class="tsne-animation">
-    <img src="images/ViT.png" class="tsne-item fade-in delay-0" alt="ViT" />
-    <img src="images/gcd.png" class="tsne-item fade-in delay-1" alt="GCD" />
-    <img src="images/cdad.png" class="tsne-item fade-in delay-2" alt="CDAD-Net" />
-    <img src="images/dgcd.png" class="tsne-item fade-in delay-3" alt="DG2CD-Net" />
-    <img src="images/dgcd_lora.png" class="tsne-item fade-in delay-4" alt="DG2CD-Net LoRA" />
+    <img src="images/ViT.png" class="tsne-item" alt="ViT" />
+    <img src="images/gcd.png" class="tsne-item" alt="GCD" />
+    <img src="images/cdad.png" class="tsne-item" alt="CDAD-Net" />
+    <img src="images/dgcd.png" class="tsne-item" alt="DG2CD-Net" />
+    <img src="images/dgcd_lora.png" class="tsne-item" alt="DG2CD-Net LoRA" />
     <img src="images/legend.png" class="legend" alt="Legend" />
   </div>
+  <p style="font-size: 1rem; color: #555; margin-top: 0.5rem; max-width: 700px; text-align: center;">
+    <em>t-SNE visualization of clustered embeddings from ViT baseline to our final approach DG<sup>2</sup>CD-Net* (LoRA). 
+    Categories are color-coded as shown in the legend.</em>
+  </p>
+
 
   <section class="section" id="BibTeX" style="
       max-width: 900px;
@@ -255,6 +340,53 @@
     The template is borrowed from
     <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener noreferrer" style="color: #1a73e8; text-decoration: none;">Nerfies</a>.
   </footer>
+
+
+  <script>
+  function animateNumber(label) {
+    const target = parseFloat(label.dataset.target);
+    let current = 0;
+    const step = target / 60;
+    function countUp() {
+      current += step;
+      if (current >= target) {
+        label.textContent = target.toFixed(2);
+        return;
+      }
+      label.textContent = current.toFixed(2);
+      requestAnimationFrame(countUp);
+    }
+    countUp();
+  }
+
+  function animateBarChart() {
+    const bars = document.querySelectorAll('.bar');
+    const labels = document.querySelectorAll('.bar-label');
+    bars.forEach(bar => {
+      const targetHeight = bar.dataset.height;
+      bar.style.height = `${targetHeight}%`;
+    });
+    labels.forEach(label => animateNumber(label));
+  }
+
+  function revealOnScroll() {
+    const elements = document.querySelectorAll('.animate-on-scroll, .tsne-item, .bar-chart');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          if (entry.target.classList.contains('bar-chart')) {
+            animateBarChart();
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    elements.forEach(el => observer.observe(el));
+  }
+
+  window.addEventListener('DOMContentLoaded', revealOnScroll);
+  </script>
 
 </body>
 </html>
