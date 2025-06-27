@@ -197,6 +197,47 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    .image-animation-section {
+      position: relative;
+      margin-top: 4rem;
+      height: 600px;
+    }
+    .image-grid {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .image-part {
+      position: absolute;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease-out;
+      max-width: 300px;
+    }
+    .part1 {
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .part2 {
+      right: 0;
+      top: 10%;
+    }
+    .part3 {
+      right: 0;
+      bottom: 10%;
+    }
+    .image-labels {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      max-width: 300px;
+      opacity: 1;
+    }
+
   </style>
  
 </head>
@@ -253,6 +294,16 @@
   </div>
 
 
+  <div class="image-animation-section">
+    <div class="image-grid">
+      <img src="images/gen/train.png" class="image-part part1" alt="Training">
+      <img src="images/gen/seen.png" class="image-part part2" alt="Inference Seen">
+      <img src="images/gen/unseen.png" class="image-part part3" alt="Inference Unseen">
+    </div>
+    <img src="images/gen/train-test.png" class="image-labels" alt="Labels">
+  </div>
+
+
   <div class="bar-chart animate-on-scroll">
     <div class="bar-container">
       <div class="bar bar-1" data-height="96"></div>
@@ -280,12 +331,12 @@
 
 
   <div class="tsne-animation">
-    <img src="images/ViT.png" class="tsne-item" alt="ViT" />
-    <img src="images/gcd.png" class="tsne-item" alt="GCD" />
-    <img src="images/cdad.png" class="tsne-item" alt="CDAD-Net" />
-    <img src="images/dgcd.png" class="tsne-item" alt="DG2CD-Net" />
-    <img src="images/dgcd_lora.png" class="tsne-item" alt="DG2CD-Net LoRA" />
-    <img src="images/legend.png" class="legend" alt="Legend" />
+    <img src="images/tsne/ViT.png" class="tsne-item" alt="ViT" />
+    <img src="images/tsne/gcd.png" class="tsne-item" alt="GCD" />
+    <img src="images/tsne/cdad.png" class="tsne-item" alt="CDAD-Net" />
+    <img src="images/tsne/dgcd.png" class="tsne-item" alt="DG2CD-Net" />
+    <img src="images/tsne/dgcd_lora.png" class="tsne-item" alt="DG2CD-Net LoRA" />
+    <img src="images/tsne/legend.png" class="legend" alt="Legend" />
   </div>
   <p style="font-size: 1rem; color: #555; margin-top: 0.5rem; max-width: 700px; text-align: center;">
     <em>t-SNE visualization of clustered embeddings from ViT baseline to our final approach DG<sup>2</sup>CD-Net* (LoRA). 
@@ -412,6 +463,41 @@
   }
 
   window.addEventListener('DOMContentLoaded', revealOnScroll);
+
+  function animateImageParts() {
+    const section = document.querySelector('.image-animation-section');
+    const part1 = document.querySelector('.part1');
+    const part2 = document.querySelector('.part2');
+    const part3 = document.querySelector('.part3');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          part1.style.opacity = '1';
+          part1.style.transform = 'translateY(0)';
+
+          setTimeout(() => {
+            part2.style.opacity = '1';
+            part2.style.transform = 'translateY(0)';
+          }, 1000);
+
+          setTimeout(() => {
+            part3.style.opacity = '1';
+            part3.style.transform = 'translateY(0)';
+          }, 2000);
+
+          observer.unobserve(section);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(section);
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    revealOnScroll();
+    animateImageParts();
+  });
+
   </script>
 
 </body>
