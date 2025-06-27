@@ -362,9 +362,12 @@
   function animateBarChart() {
     const bars = document.querySelectorAll('.bar');
     const labels = document.querySelectorAll('.bar-label');
+    const chartHeight = document.querySelector('.bar-chart').offsetHeight;
+
     bars.forEach(bar => {
-      const targetHeight = bar.dataset.height;
-      bar.style.height = `${targetHeight}%`;
+      const percentHeight = parseFloat(bar.dataset.height);
+      const pixelHeight = chartHeight * (percentHeight / 100);  // convert % to px
+      bar.style.height = `${pixelHeight}px`;
     });
     labels.forEach(label => animateNumber(label));
   }
