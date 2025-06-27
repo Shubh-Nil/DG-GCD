@@ -121,12 +121,12 @@
       height: 200px;
       margin-top: 3rem;
       padding-left: 40px;
-      border-left: 2px solid #999;
-      border-bottom: 2px solid #999;
+      border-left: 2px solid #666;
+      border-bottom: 2px solid #666;
       background: repeating-linear-gradient(
         to top,
-        #eee,
-        #eee 1px,
+        #999,
+        #999 1px,
         transparent 1px,
         transparent 40px
       );
@@ -134,7 +134,7 @@
     .bar-chart::before {
       content: "% Sign Conflicts";
       position: absolute;
-      left: -60px;
+      left: -80px;
       bottom: 100px;
       transform: rotate(-90deg);
       transform-origin: center;
@@ -143,7 +143,7 @@
     }
     .bar-container {
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
       align-items: center;
       position: relative;
     }
@@ -173,7 +173,7 @@
       text-align: center;
       font-size: 0.9rem;
       color: #444;
-      transform: translateY(20px);
+      transform: none;
     }
     
     .animate-on-scroll {
