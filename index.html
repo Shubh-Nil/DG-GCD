@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DG-GCD • CVPR 2025</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.ico" />
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:title" content="DG-GCD • CVPR 2025" />
+  <meta property="og:description" content="An Adaptive Task-Arithmetic Driven Approach to Domain Generalization and Category Discovery." />
+  <meta property="og:type" content="website" />
+  <!-- Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -85,15 +92,46 @@
     }
   </style>
 
+  <style>
+  .tsne-animation {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 6px;
+    background-color: white;
+    padding: 2rem 1rem;
+    margin-top: 3rem;
+    overflow-x: auto;
+    border-radius: 12px;
+  }
 
-  <!-- <style>
-    h1 {
-      font-size: 2.5rem;
-      max-width: 720px;
-      margin-bottom: 0.5rem;
-      line-height: 1.2;
+  .tsne-item {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1s ease, transform 1s ease;
+    height: auto;
+    max-height: 200px;
+  }
+
+  .fade-in {
+    animation: appear 1s forwards;
+  }
+
+  .delay-0 { animation-delay: 0s; }
+  .delay-1 { animation-delay: 1s; }
+  .delay-2 { animation-delay: 2s; }
+  .delay-3 { animation-delay: 3s; }
+  .delay-4 { animation-delay: 4s; }
+  .delay-5 { animation-delay: 5s; }
+
+  @keyframes appear {
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
-  </style> -->
+  }
+  </style>
+
 </head>
 <body>
 
@@ -131,7 +169,7 @@
       arXiv
     </a>
 
-    <a href="https://github.com/yourusername/yourrepo" class="btn" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/Shubh-Nil/D_GCD" class="btn" target="_blank" rel="noopener noreferrer">
       <!-- GitHub icon (simple) -->
       <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.373 0 12a12 12 0 0 0 8.207 11.44c.6.11.793-.26.793-.577 0-.286-.01-1.04-.016-2.04-3.338.727-4.042-1.61-4.042-1.61-.546-1.39-1.334-1.76-1.334-1.76-1.09-.744.082-.73.082-.73 1.204.084 1.838 1.237 1.838 1.237 1.07 1.832 2.807 1.303 3.492.996.11-.776.418-1.303.76-1.602-2.665-.304-5.467-1.334-5.467-5.933 0-1.31.467-2.38 1.235-3.22-.124-.303-.536-1.523.116-3.176 0 0 1.008-.322 3.3 1.23a11.47 11.47 0 0 1 3.003-.404c1.02.005 2.048.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.807 5.625-5.48 5.922.43.37.823 1.104.823 2.222 0 1.604-.014 2.896-.014 3.286 0 .32.19.694.8.576A12.005 12.005 0 0 0 24 12c0-6.627-5.373-12-12-12z"/></svg>
       Code
@@ -146,6 +184,17 @@
       Poster
     </a>
   </div>
+
+  <div class="tsne-animation">
+    <img src="images/legend.png" class="tsne-item fade-in delay-0" alt="Legend" />
+    <img src="images/ViT.png" class="tsne-item fade-in delay-1" alt="ViT" />
+    <img src="images/gcd.png" class="tsne-item fade-in delay-2" alt="GCD" />
+    <img src="images/cdad.png" class="tsne-item fade-in delay-3" alt="CDAD-Net" />
+    <img src="images/dgcd.png" class="tsne-item fade-in delay-4" alt="DG2CD-Net" />
+    <img src="images/dgcd_lora.png" class="tsne-item fade-in delay-5" alt="DG2CD-Net LoRA" />
+  </div>
+
+
 
   <section class="section" id="BibTeX" style="
       max-width: 900px;
