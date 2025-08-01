@@ -127,15 +127,25 @@
   .delay-4 { animation-delay: 3s; }
   .delay-5 { animation-delay: 3.75s; }
 
+  .chart-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 300px;
+  }
+
+  .bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .bar {
     position: relative;
     width: 60px;
     background-color: var(--bar-color);
     border-radius: 4px 4px 0 0;
-    height: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    height: 0; /* will animate up */
   }
 
   .bar-value {
@@ -149,9 +159,9 @@
   .bar-label {
     margin-top: 8px;
     text-align: center;
-    width: 100%;
-    color: #444; /* optional for readability */
+    color: #444;
   }
+
 
   @keyframes appear {
     to {
@@ -159,15 +169,6 @@
       transform: scale(1);
     }
   }
-  </style>
-
-  <style>
-  #animated-bar-chart { margin: 3rem auto; max-width: 700px; }
-  #animated-bar-chart h2 { margin-bottom: 1rem; font-size: 1.5rem; }
-  .chart-container { display: flex; justify-content: space-around; align-items: flex-end; height: 300px; border-left: 1px solid #ccc; border-bottom: 1px solid #ccc; padding-bottom: 20px; position: relative; }
-  .bar { position: relative; width: 60px; background-color: var(--bar-color); border-radius: 4px 4px 0 0; height: 0; }
-  .bar-value { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-weight: bold; }
-  .bar-label { margin-top: 8px; text-align: center; display: block; width: 100%; }
   </style>
 
 </head>
@@ -235,24 +236,37 @@
 
   <!-- Animated Bar Chart Section -->
   <section id="animated-bar-chart" style="width:100%; max-width:700px;">
-    <h2>Fraction of Sign Conflicts</h2>
+    <h2>Sign Conflicts</h2>
     <div class="chart-container">
-      <div class="bar" data-value="0.96" style="--bar-color: #6AA84F;">
-        <span class="bar-value">0.00</span>
+      
+      <div class="bar-wrapper">
+        <div class="bar" data-value="0.96" style="--bar-color: #6AA84F;">
+          <span class="bar-value">0.00</span>
+        </div>
         <span class="bar-label">Ties Merging</span>
       </div>
-      <div class="bar" data-value="0.63" style="--bar-color: #45818E;">
-        <span class="bar-value">0.00</span>
+
+      <div class="bar-wrapper">
+        <div class="bar" data-value="0.63" style="--bar-color: #45818E;">
+          <span class="bar-value">0.00</span>
+        </div>
         <span class="bar-label">Fisher Merging</span>
       </div>
-      <div class="bar" data-value="0.58" style="--bar-color: #A64D79;">
-        <span class="bar-value">0.00</span>
+
+      <div class="bar-wrapper">
+        <div class="bar" data-value="0.58" style="--bar-color: #A64D79;">
+          <span class="bar-value">0.00</span>
+        </div>
         <span class="bar-label">Task Arithmetic</span>
       </div>
-      <div class="bar" data-value="0.54" style="--bar-color: #8E7CC3;">
-        <span class="bar-value">0.00</span>
+
+      <div class="bar-wrapper">
+        <div class="bar" data-value="0.54" style="--bar-color: #8E7CC3;">
+          <span class="bar-value">0.00</span>
+        </div>
         <span class="bar-label">DG²CD-Net</span>
       </div>
+
     </div>
   </section>
 
