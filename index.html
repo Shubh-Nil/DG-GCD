@@ -95,24 +95,22 @@
   <style>
   .tsne-animation {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;                 /* allows wrapping on small screens */
     justify-content: center;
-    max-width: 100vw;           /* never exceed the viewport width */
-    overflow-x: hidden;         /* hide any accidental overflow */
-    gap: 6px;
-    background-color: white;
+    gap: 10px;
     padding: 2rem 1rem;
     margin-top: 3rem;
-    overflow-x: auto;
+    background-color: white;
     border-radius: 12px;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   .tsne-item {
-    /* there are 6 items total, and 5 gaps of 6px = 30px, so each gets (100% - 30px)/6 */
-    flex: 0 0 calc((100% - 30px) / 6);
-    max-height: 250px;          /* keep your height cap */
-    width: 100%;                /* fill its flex-basis exactly */
-    height: auto;               /* preserve aspect ratio */
+    flex: 1 1 calc(16% - 10px);      /* six items per row with gaps */
+    max-width: 150px;                /* cap each image width */
+    height: auto;
+    max-height: 200px;               /* still respects height limit */
     opacity: 0;
     transform: scale(0.95);
     transition: opacity 1s ease, transform 1s ease;
