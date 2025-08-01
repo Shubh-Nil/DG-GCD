@@ -110,7 +110,7 @@
   .tsne-item {
     /* there are 6 items total, and 5 gaps of 6px = 30px, so each gets (100% - 30px)/6 */
     flex: 0 0 calc((100% - 30px) / 6);
-    max-height: 200px;          /* keep your height cap */
+    max-height: 250px;          /* keep your height cap */
     width: 100%;                /* fill its flex-basis exactly */
     height: auto;               /* preserve aspect ratio */
     opacity: 0;
@@ -135,6 +135,15 @@
       transform: scale(1);
     }
   }
+  </style>
+
+  <style>
+  #animated-bar-chart { margin: 3rem auto; max-width: 700px; }
+  #animated-bar-chart h2 { margin-bottom: 1rem; font-size: 1.5rem; }
+  .chart-container { display: flex; justify-content: space-around; align-items: flex-end; height: 300px; border-left: 1px solid #ccc; border-bottom: 1px solid #ccc; padding-bottom: 20px; position: relative; }
+  .bar { position: relative; width: 60px; background-color: var(--bar-color); border-radius: 4px 4px 0 0; height: 0; }
+  .bar-value { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-weight: bold; }
+  .bar-label { margin-top: 8px; text-align: center; display: block; width: 100%; }
   </style>
 
 </head>
@@ -198,6 +207,30 @@
   <div class="arch" style="display:flex; gap:10px; justify-content:center; margin-top:2rem;">
     <img src="images/arch.gif" alt="New Image 2" style="max-height:400px;" />
   </div>
+
+
+  <!-- Animated Bar Chart Section -->
+  <section id="animated-bar-chart" style="width:100%; max-width:700px;">
+    <h2>Fraction of Sign Conflicts</h2>
+    <div class="chart-container">
+      <div class="bar" data-value="0.96" style="--bar-color: #4CAF50;">
+        <span class="bar-value">0.00</span>
+        <span class="bar-label">Ties Merging [67]</span>
+      </div>
+      <div class="bar" data-value="0.63" style="--bar-color: #00796B;">
+        <span class="bar-value">0.00</span>
+        <span class="bar-label">Fisher Merging [30]</span>
+      </div>
+      <div class="bar" data-value="0.58" style="--bar-color: #9C27B0;">
+        <span class="bar-value">0.00</span>
+        <span class="bar-label">Task Arithmetic [21]</span>
+      </div>
+      <div class="bar" data-value="0.54" style="--bar-color: #673AB7;">
+        <span class="bar-value">0.00</span>
+        <span class="bar-label">DG²CD-Net</span>
+      </div>
+    </div>
+  </section>
 
 
   <div class="tsne-animation">
@@ -274,6 +307,28 @@
     <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener noreferrer" style="color: #1a73e8; text-decoration: none;">Nerfies</a>.
   </footer>
 
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const bars = document.querySelectorAll('#animated-bar-chart .bar');
+    const duration = 2000;
+    const chartHeight = 300;
+    const startTime = performance.now();
+    function animate(time) {
+      const elapsed = time - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      bars.forEach(bar => {
+        const value = parseFloat(bar.getAttribute('data-value'));
+        const height = progress * value * chartHeight;
+        bar.style.height = height + 'px';
+        const displayValue = (progress * value).toFixed(2);
+        bar.querySelector('.bar-value').innerText = displayValue;
+      });
+      if (progress < 1) requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  });
+  </script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
