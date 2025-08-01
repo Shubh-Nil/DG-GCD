@@ -239,8 +239,6 @@
 
   <!-- Animated Bar Chart Section -->
   <section id="animated-bar-chart" style="width:100%; max-width:500px; margin-top:3rem;">
-    <h2>Sign Conflicts</h2>
-
     <!-- Wrapper to position axes and label -->
     <div class="chart-wrapper" style="position: relative; padding-left: 40px;">
 
@@ -410,6 +408,27 @@
 
     const chart = document.getElementById('animated-bar-chart');
     observer.observe(chart);
+  });
+  </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tsneSection = document.querySelector('.tsne-animation');
+    if (!tsneSection) return;
+    
+    const images = tsneSection.querySelectorAll('.tsne-item');
+    const obs = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          images.forEach(img => img.classList.add('fade-in'));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    obs.observe(tsneSection);
   });
   </script>
 
