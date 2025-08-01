@@ -108,6 +108,11 @@
   }
 
   .tsne-item {
+    /* there are 6 items total, and 5 gaps of 6px = 30px, so each gets (100% - 30px)/6 */
+    flex: 0 0 calc((100% - 30px) / 6);
+    max-height: 200px;          /* keep your height cap */
+    width: 100%;                /* fill its flex-basis exactly */
+    height: auto;               /* preserve aspect ratio */
     opacity: 0;
     transform: scale(0.95);
     transition: opacity 1s ease, transform 1s ease;
