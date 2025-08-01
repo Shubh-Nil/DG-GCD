@@ -127,6 +127,32 @@
   .delay-4 { animation-delay: 3s; }
   .delay-5 { animation-delay: 3.75s; }
 
+  .bar {
+    position: relative;
+    width: 60px;
+    background-color: var(--bar-color);
+    border-radius: 4px 4px 0 0;
+    height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .bar-value {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+  }
+
+  .bar-label {
+    margin-top: 8px;
+    text-align: center;
+    width: 100%;
+    color: #444; /* optional for readability */
+  }
+
   @keyframes appear {
     to {
       opacity: 1;
@@ -211,19 +237,19 @@
   <section id="animated-bar-chart" style="width:100%; max-width:700px;">
     <h2>Fraction of Sign Conflicts</h2>
     <div class="chart-container">
-      <div class="bar" data-value="0.96" style="--bar-color: #4CAF50;">
+      <div class="bar" data-value="0.96" style="--bar-color: #66A61E;">
         <span class="bar-value">0.00</span>
-        <span class="bar-label">Ties Merging [67]</span>
+        <span class="bar-label">Ties Merging</span>
       </div>
-      <div class="bar" data-value="0.63" style="--bar-color: #00796B;">
+      <div class="bar" data-value="0.63" style="--bar-color: #1B9E77;">
         <span class="bar-value">0.00</span>
-        <span class="bar-label">Fisher Merging [30]</span>
+        <span class="bar-label">Fisher Merging</span>
       </div>
-      <div class="bar" data-value="0.58" style="--bar-color: #9C27B0;">
+      <div class="bar" data-value="0.58" style="--bar-color: #D95F02;">
         <span class="bar-value">0.00</span>
-        <span class="bar-label">Task Arithmetic [21]</span>
+        <span class="bar-label">Task Arithmetic</span>
       </div>
-      <div class="bar" data-value="0.54" style="--bar-color: #673AB7;">
+      <div class="bar" data-value="0.54" style="--bar-color: #7570B3;">
         <span class="bar-value">0.00</span>
         <span class="bar-label">DG²CD-Net</span>
       </div>
@@ -309,46 +335,43 @@
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const bars = document.querySelectorAll('#animated-bar-chart .bar');
-    const duration = 2000;
     const chartHeight = 300;
-    const startTime = performance.now();
-    function animate(time) {
-      const elapsed = time - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      bars.forEach(bar => {
-        const value = parseFloat(bar.getAttribute('data-value'));
-        const height = progress * value * chartHeight;
-        bar.style.height = height + 'px';
-        const displayValue = (progress * value).toFixed(2);
-        bar.querySelector('.bar-value').innerText = displayValue;
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          bars.forEach(bar => {
+            const value = parseFloat(bar.dataset.value);
+            const targetHeight = value * chartHeight;
+            const startTime = performance.now();
+            const barValue = bar.querySelector('.bar-value');
+            const barColor = getComputedStyle(bar).getPropertyValue('--bar-color').trim();
+            barValue.style.color = barColor;
+
+            function animate(time) {
+              const progress = Math.min((time - startTime) / 2000, 1);
+              const currentHeight = progress * targetHeight;
+              const currentValue = (progress * value).toFixed(2);
+
+              bar.style.height = `${currentHeight}px`;
+              barValue.innerText = currentValue;
+
+              if (progress < 1) requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
+          });
+
+          observer.unobserve(entry.target); // only animate once
+        }
       });
-      if (progress < 1) requestAnimationFrame(animate);
-    }
-    requestAnimationFrame(animate);
+    }, { threshold: 0.4 });
+
+    const chart = document.getElementById('animated-bar-chart');
+    observer.observe(chart);
   });
   </script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const tsneSection = document.querySelector('.tsne-animation');
-      const items = tsneSection.querySelectorAll('.tsne-item');
-
-      // create the observer
-      const obs = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // when the container enters view, add fade-in to each item
-            items.forEach(item => item.classList.add('fade-in'));
-            observer.unobserve(entry.target);
-          }
-        });
-      },{
-        threshold: 0.3   // fire when 30% of the container is visible
-      });
-
-      obs.observe(tsneSection);
-    });
-  </script>
 
 </body>
 </html>
