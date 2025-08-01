@@ -93,11 +93,11 @@
   </style>
 
   <style>
-  .tsne-animation {
+  .tsne-container {
     display: flex;
-    flex-wrap: wrap;                 /* allows wrapping on small screens */
+    flex-wrap: wrap;                   /* wrap on small screens */
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     padding: 2rem 1rem;
     margin-top: 3rem;
     background-color: white;
@@ -107,10 +107,10 @@
   }
 
   .tsne-item {
-    flex: 1 1 calc(16% - 10px);      /* six items per row with gaps */
-    max-width: 150px;                /* cap each image width */
+    flex: 0 1 150px;                   /* max width for each */
     height: auto;
-    max-height: 200px;               /* still respects height limit */
+    max-height: 180px;
+    object-fit: contain;
     opacity: 0;
     transform: scale(0.95);
     transition: opacity 1s ease, transform 1s ease;
