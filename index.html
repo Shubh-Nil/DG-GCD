@@ -141,6 +141,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
   }
 
   .bar {
@@ -160,19 +161,24 @@
   }
 
   .bar-label {
-    margin-top: 8px;
     text-align: center;
     color: #444;
-  }
+    position: absolute;    
+    bottom: -28px;         
+    left: 50%;             
+    transform: translateX(-50%); 
+    white-space: nowrap;   
+    }
 
   .chart-wrapper {
     position: relative;
     padding-left: 45px; /* Provides space for labels */
+    padding-bottom: 30px;
     box-sizing: border-box;
   }
 
   .y-axis-title {
-    left: 15px !important; 
+    left: 22px !important; 
   }
 
   .y-ticks {
