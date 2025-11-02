@@ -177,7 +177,7 @@
   }
 
   .y-axis-title {
-    left: -5px !important; 
+    left: -15px !important; 
   }
 
   .y-ticks {
@@ -203,6 +203,24 @@
   .y-ticks span:nth-child(3) { top: 50%; transform: translateY(-50%); }  
   .y-ticks span:nth-child(4) { top: 75%; transform: translateY(-50%); }  
   .y-ticks span:nth-child(5) { bottom: 0; transform: translateY(-50%); } 
+
+  .animated-image {
+    opacity: 0;
+    /* This starts the image 120% of its own width to the left */
+    transform: translateX(-120%); 
+    
+    /* This defines the animation timing */
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.2, 1, 0.3, 1);
+  }
+
+  .problem-animation.is-visible .animated-image {
+    opacity: 1;
+    transform: translateX(0); /* Moves to its final position */
+  }
+
+  .problem-animation.is-visible .novel-classes {
+    transition-delay: 0.5s; /* The 2nd image animates 0.5s after the 1st */
+  }
 
 
   @keyframes appear {
@@ -265,6 +283,15 @@
       Poster
     </a>
   </div>
+
+
+  <section class="problem-animation" style="position: relative; width: 100%; max-width: 800px; height: 500px; /* Adjust height as needed */ margin: 4rem auto; border-radius: 8px;">
+    <img src="images/train.png" alt="Real Domain" style="position: absolute; left: 5%; top: 10%; width: 40%; height: auto; border-radius: 8px;">
+    <img src="images/train-test.png" alt="Training/Inference" style="position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%); width: 90%;">
+    <img src="images/seen.png" alt="Seen Classes" class="animated-image seen-classes" style="position: absolute; left: 55%; /* Final X position */ top: 5%; width: 40%; height: auto; border-radius: 8px;">
+    <img src="images/unseen.png" alt="Novel Classes" class="animated-image novel-classes" style="position: absolute; left: 55%; /* Final X position */ top: 45%; width: 40%; height: auto; border-radius: 8px;">
+  </section>
+
 
   <!-- Architecture -->
   <div class="global" style="display:flex; gap:10px; justify-content:center; margin-top:2rem;">
@@ -415,7 +442,7 @@
   </footer>
 
 
-  <script>
+  <!-- <script>
   document.addEventListener('DOMContentLoaded', () => {
     const bars = document.querySelectorAll('#animated-bar-chart .bar');
     const chartHeight = 300;
@@ -473,6 +500,87 @@
     });
 
     obs.observe(tsneSection);
+  });
+  </script> -->
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. Bar Chart Animation
+    const bars = document.querySelectorAll('#animated-bar-chart .bar');
+    const chartHeight = 300;
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          bars.forEach(bar => {
+            const value = parseFloat(bar.dataset.value);
+            const targetHeight = value * chartHeight;
+            const startTime = performance.now();
+            const barValue = bar.querySelector('.bar-value');
+            const barColor = getComputedStyle(bar).getPropertyValue('--bar-color').trim();
+            barValue.style.color = barColor;
+
+            function animate(time) {
+              const progress = Math.min((time - startTime) / 2000, 1);
+              const currentHeight = progress * targetHeight;
+              const currentValue = (progress * value).toFixed(2);
+
+              bar.style.height = `${currentHeight}px`;
+              barValue.innerText = currentValue;
+
+              if (progress < 1) requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
+          });
+
+          observer.unobserve(entry.target); // only animate once
+        }
+      });
+    }, { threshold: 0.4 });
+
+    const chart = document.getElementById('animated-bar-chart');
+    // Add a check in case the element doesn't exist on the page
+    if (chart) {
+        observer.observe(chart);
+    }
+
+    // 2. t-SNE Animation
+    const tsneSection = document.querySelector('.tsne-animation');
+    if (tsneSection) {
+      const images = tsneSection.querySelectorAll('.tsne-item');
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            images.forEach(img => img.classList.add('fade-in'));
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.3
+      });
+
+      obs.observe(tsneSection);
+    }
+    
+    // 3. Teaser Animation 
+    const animSection = document.querySelector('.problem-animation');
+    if (animSection) {
+      const animObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.4 // Triggers when 40% of the section is visible
+      });
+
+      animObserver.observe(animSection);
+    }
+
   });
   </script>
 
