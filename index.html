@@ -210,7 +210,7 @@
     transform: translateX(-120%); 
     
     /* This defines the animation timing */
-    transition: opacity 2s ease-out, transform 2s cubic-bezier(0.2, 1, 0.3, 1);
+    transition: opacity 3s ease-out, transform 3s cubic-bezier(0.2, 1, 0.3, 1);
   }
 
   .problem-animation.is-visible .animated-image {
@@ -219,7 +219,7 @@
   }
 
   .problem-animation.is-visible .novel-classes {
-    transition-delay: 0.5s; /* The 2nd image animates 0.5s after the 1st */
+    transition-delay: 1s; /* The 2nd image animates 0.5s after the 1st */
   }
 
 
@@ -288,8 +288,8 @@
   <section class="problem-animation" style="position: relative; width: 100%; max-width: 600px; height: 400px; margin: 4rem auto;">
     <img src="images/teaser/train.png" alt="Real Domain" style="position: absolute; left: 3%; top: 0; width: 25%; height: auto; z-index: 1;">
     <img src="images/teaser/train-test.png" alt="Training/Inference" style="position: absolute; bottom: 0; left: 0; width: 100%; height: auto; z-index: 3;">
-    <img src="images/teaser/seen.png" alt="Seen Classes" class="animated-image seen-classes" style="position: absolute; left: 45%; top: 0; width:45%; height: auto; z-index: 2;">
-    <img src="images/teaser/unseen.png" alt="Novel Classes" class="animated-image novel-classes" style="position: absolute; left: 45%; top: 32%; width: 45%; height: auto; z-index: 2;">
+    <img src="images/teaser/seen.png" alt="Seen Classes" class="animated-image seen-classes" style="position: absolute; left: 35%; top: 0; width:45%; height: auto; z-index: 2;">
+    <img src="images/teaser/unseen.png" alt="Novel Classes" class="animated-image novel-classes" style="position: absolute; left: 35%; top: 32%; width: 45%; height: auto; z-index: 2;">
   </section>
 
 
